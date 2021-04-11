@@ -22,7 +22,7 @@ const InvoiceSchema = new Schema({
       country: String,
     }
   },
-  items: [{ name: String, quantity: Number, price: Number }],
+  items: [{ name: String, quantity: String, price: String }],
 });
 
 module.exports = mongoose.model("Invoice", InvoiceSchema);

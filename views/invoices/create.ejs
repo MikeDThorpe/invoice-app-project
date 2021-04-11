@@ -1,0 +1,139 @@
+<% layout('layouts/boilerplate') %>
+<section class="mb-5">
+  <h1>New Invoice</h1>
+  <form action="/endpoint" method="POST">
+    <!-- address form -->
+    <h3 class="mt-5">Bill From</h3>
+    <div class="form-row mt-3">
+      <label for="addressFrom">Street Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="addressFrom"
+        name="invoice.addressFrom[street]"
+      />
+    </div>
+    <div class="form-group row mt-3">
+      <div class="col-md-6">
+        <label for="cityFrom">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cityFrom"
+          name="invoice.addressFrom[city]"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="postCodeFrom">Post Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postCodeFrom"
+          name="invoice.addressFrom[postCode]"
+        />
+      </div>
+    </div>
+    <div class="form-row mt-3">
+      <label for="countryFrom">Country</label>
+      <input
+        type="text"
+        class="form-control"
+        id="countryFrom"
+        name="invoice.addressFrom[country]"
+      />
+    </div>
+    <!-- address to -->
+    <h3 class="mt-5">Bill To</h3>
+    <div class="form-row mt-3">
+      <label for="clientName">Client's Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="clientName"
+        name="invoice.client[name]"
+      />
+    </div>
+    <div class="form-row mt-3">
+      <label for="clientEmail">Client's Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="clientEmail"
+        name="invoice.client[email"
+      />
+    </div>
+    <div class="form-row mt-3">
+      <label for="clientStreet">Steeet Address</label>
+      <input
+        type="text"
+        class="form-control"
+        name="invoice.client.address[street]"
+      />
+    </div>
+    <div class="form-group row mt-3">
+      <div class="col-md-6">
+        <label for="clientCity">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientCity"
+          name="invoice.client.address[city]"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="clientPostcode">Post Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientPostcode"
+          name="invoice.client.address[postCode]"
+        />
+      </div>
+    </div>
+    <!-- invoice details -->
+    <div class="form-group row mt-3">
+      <div class="col-lg-4">
+        <label for="invoiceDate">Invoice Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="invoiceDate"
+          name="invoice[invoiceDate]"
+        />
+      </div>
+      <div class="col-lg-4">
+        <label for="invoiceTerms">Invoice Terms</label>
+        <select
+          id="invoiceTerms"
+          class="form-control"
+          name="invoice[paymentTerms]"
+        >
+          <option value="1">Net 1 Day</option>
+          <option value="7">Net 7 Days</option>
+          <option value="14">Net 14 Days</option>
+          <option value="30">Net 30 Days</option>
+          <option value="60">Net 60 Days</option>
+        </select>
+      </div>
+      <div class="col-lg-4">
+        <label for="description">Product Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="invoice[description]"
+          id="description"
+        />
+      </div>
+    </div>
+    <!-- item list -->
+    <h3 class="mt-5">Item List</h3>
+    <div class="row my-3 border-bottom">
+        <div class="col-4"><p>Item</p></div>
+        <div class="col-4"><p>Qty</p></div>
+        <div class="col-4"><p>Price</p></div>
+    </div>
+    </div>
+    <section id="new-invoice-item-list"></section>
+    <button class="button addItemButton" type="button" onClick="createNewInvoiceItem()">+ Add New Item</button>
+  </form>
+</section>

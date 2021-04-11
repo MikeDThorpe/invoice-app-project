@@ -9,9 +9,10 @@ const Invoice = require("./models/invoice");
 const path = require("path");
 const ejsmate = require("ejs-mate");
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+app.listen(port);
+
+//serve static assets
+app.use(express.static('assets'))
 
 //set tools for application
 app.engine("ejs", ejsmate);
@@ -32,26 +33,30 @@ db.once("open", () => {
 
 // homepage
 app.get("/", (req, res) => {
-  res.render("home", {});
+  res.render("index", {title: "Spartan Invoicing"});
 });
 // login page
 app.get("/login", (req, res) => {
   res.render("login", {});
 });
+// create invoice
+app.get("/invoices/create", (req, res) => {
+  res.render("invoices/create", {title: "Create Invoice"})
+})
 // all invoices
-app.get("/:username/invoices", (req, res) => {
+app.get("/invoices", (req, res) => {
   res.render("invoices/all", {});
 });
 // single invoice
-app.get("/:username/invoices/:id", (req, res) => {
+app.get("/invoices/:id", (req, res) => {
   res.render("invoices/single", {});
 });
 // edit invoice
-app.get("/:username/invoices/:id/edit", (req, res) => {
+app.get("/invoices/:id/edit", (req, res) => {
   res.render("invoices/edit", {});
 });
 // account details
-app.get("/:username/account", (req, res) => {
+app.get("/account", (req, res) => {
   res.render("account", {});
 });
 // 404 route

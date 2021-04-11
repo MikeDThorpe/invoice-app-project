@@ -1,0 +1,26 @@
+.button {
+  height: 48px;
+  font-size: 13px;
+  border: none;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+%button-large {
+  width: 150px;
+}
+%button-small {
+  width: 89px;
+}
+
+.addItemButton {
+  @extend %button-large;
+  background-color: $lightGrey;
+  color: $purpleGrey;
+  &:hover {
+    background-color: $purpleGrey;
+    color: #fff;
+  }
+}

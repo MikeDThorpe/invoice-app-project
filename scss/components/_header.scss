@@ -1,0 +1,46 @@
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $navyBlue;
+  img {
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    @include large-desktop {
+      margin: 0;
+      position: absolute;
+      bottom: 30px;
+      right: auto;
+    }
+  }
+  @include large-desktop {
+    height: 100vh;
+    width: 100px;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 20px;
+  }
+}
+.logo-container {
+  width: 75px;
+  height: 75px;
+  background-color: $purpleDarkBright;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  @include large-desktop {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

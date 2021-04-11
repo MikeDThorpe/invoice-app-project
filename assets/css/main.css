@@ -1,0 +1,115 @@
+* {
+  font-family: "Spartan", sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: 20px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+p, a, li {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+header {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #252945;
+}
+
+header img {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+@media (min-width: 1440px) {
+  header img {
+    margin: 0;
+    position: absolute;
+    bottom: 30px;
+    right: auto;
+  }
+}
+
+@media (min-width: 1440px) {
+  header {
+    height: 100vh;
+    width: 100px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 20px;
+  }
+}
+
+.logo-container {
+  width: 75px;
+  height: 75px;
+  background-color: #7C5DFA;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+@media (min-width: 1440px) {
+  .logo-container {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.button {
+  height: 48px;
+  font-size: 13px;
+  border: none;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+.addItemButton {
+  width: 150px;
+}
+
+.addItemButton {
+  background-color: #F8F8F8;
+  color: #888EB0;
+}
+
+.addItemButton:hover {
+  background-color: #888EB0;
+  color: #fff;
+}
