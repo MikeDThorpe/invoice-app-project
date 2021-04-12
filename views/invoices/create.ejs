@@ -1,16 +1,17 @@
 <% layout('layouts/boilerplate') %>
 <section class="mb-5">
   <h1>New Invoice</h1>
-  <form action="/endpoint" method="POST">
+  <form class="p-4 validate-form" id="new-invoice-form" action="/new/invoice" method="POST" novalidate>
     <!-- address form -->
-    <h3 class="mt-5">Bill From</h3>
+    <h3>Bill From</h3>
     <div class="form-row mt-3">
       <label for="addressFrom">Street Address</label>
       <input
         type="text"
         class="form-control"
         id="addressFrom"
-        name="invoice.addressFrom[street]"
+        name="fromStreet"
+        required
       />
     </div>
     <div class="form-group row mt-3">
@@ -20,16 +21,18 @@
           type="text"
           class="form-control"
           id="cityFrom"
-          name="invoice.addressFrom[city]"
+          name="fromCity"
+          required
         />
       </div>
       <div class="col-md-6">
-        <label for="postCodeFrom">Post Code</label>
+        <label for="fromPostcode">Post Code</label>
         <input
           type="text"
           class="form-control"
           id="postCodeFrom"
-          name="invoice.addressFrom[postCode]"
+          name="fromPostCode"
+          required
         />
       </div>
     </div>
@@ -39,7 +42,8 @@
         type="text"
         class="form-control"
         id="countryFrom"
-        name="invoice.addressFrom[country]"
+        name="fromCountry"
+        required
       />
     </div>
     <!-- address to -->
@@ -50,7 +54,8 @@
         type="text"
         class="form-control"
         id="clientName"
-        name="invoice.client[name]"
+        name="clientName"
+        required
       />
     </div>
     <div class="form-row mt-3">
@@ -59,15 +64,18 @@
         type="text"
         class="form-control"
         id="clientEmail"
-        name="invoice.client[email"
+        name="clientEmail"
+        required
       />
     </div>
     <div class="form-row mt-3">
       <label for="clientStreet">Steeet Address</label>
       <input
         type="text"
+        id="clientStreet"
+        name="clientStreet"
         class="form-control"
-        name="invoice.client.address[street]"
+        required
       />
     </div>
     <div class="form-group row mt-3">
@@ -77,7 +85,8 @@
           type="text"
           class="form-control"
           id="clientCity"
-          name="invoice.client.address[city]"
+          name="clientCity"
+          required
         />
       </div>
       <div class="col-md-6">
@@ -86,27 +95,31 @@
           type="text"
           class="form-control"
           id="clientPostcode"
-          name="invoice.client.address[postCode]"
+          name="clientPostcode"
+          required
         />
       </div>
     </div>
     <!-- invoice details -->
-    <div class="form-group row mt-3">
-      <div class="col-lg-4">
+    <h3 class="mt-5">Invoice Details</h3>
+    <div class="form-group row">
+      <div class="col-lg-4 mt-3">
         <label for="invoiceDate">Invoice Date</label>
         <input
           type="date"
           class="form-control"
           id="invoiceDate"
-          name="invoice[invoiceDate]"
+          name="invoiceDate"
+          required
         />
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 mt-3">
         <label for="invoiceTerms">Invoice Terms</label>
         <select
           id="invoiceTerms"
-          class="form-control"
-          name="invoice[paymentTerms]"
+          class="form-select"
+          name="paymentTerms"
+          required
         >
           <option value="1">Net 1 Day</option>
           <option value="7">Net 7 Days</option>
@@ -115,25 +128,35 @@
           <option value="60">Net 60 Days</option>
         </select>
       </div>
-      <div class="col-lg-4">
-        <label for="description">Product Description</label>
+      <div class="col-lg-4 mt-3">
+        <label for="description">Invoice Description</label>
         <input
           type="text"
           class="form-control"
-          name="invoice[description]"
+          name="description"
           id="description"
+          required
         />
       </div>
     </div>
     <!-- item list -->
-    <h3 class="mt-5">Item List</h3>
-    <div class="row my-3 border-bottom">
+      <h3 class="mt-5">Item List</h3>
+      <div class="row my-3 border-bottom">
         <div class="col-4"><p>Item</p></div>
         <div class="col-4"><p>Qty</p></div>
         <div class="col-4"><p>Price</p></div>
+      </div>
+    <section id="new-invoice-item-list">
+      <div class="form-group row pb-3 border-bottom">
+        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="New item" name="items[0][name]" required></div>
+        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="Qty" name="items[0][qty]" required></div>
+        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="Price" name="items[0][price]" required></div>
+      </div>
+    </section>
+      <button class="my-4 button button-secondary" type="button" onClick="createNewInvoiceItem()">+ Add New Item</button>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="mx-4 button button-secondary">Discard Invoice</button>
+      <button type="submit" class="button button-primary">Save Invoice</button>
     </div>
-    </div>
-    <section id="new-invoice-item-list"></section>
-    <button class="button addItemButton" type="button" onClick="createNewInvoiceItem()">+ Add New Item</button>
   </form>
 </section>

@@ -11,16 +11,13 @@ const ejsmate = require("ejs-mate");
 
 app.listen(port);
 
-//serve static assets
-app.use(express.static('assets'))
-
 //set tools for application
 app.engine("ejs", ejsmate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 //create database connection with mongoose
-mongoose.connect("mongodb://localhost:27017/myapp", {
+mongoose.connect("mongodb://localhost:27017/invoiceApp", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -31,9 +28,16 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+//serve static assets
+app.use(express.static("assets"));
+
+// global middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // homepage
 app.get("/", (req, res) => {
-  res.render("index", {title: "Spartan Invoicing"});
+  res.render("index", { title: "Spartan Business Solutions | Create, Receive & Send Invoices" });
 });
 // login page
 app.get("/login", (req, res) => {
@@ -41,8 +45,14 @@ app.get("/login", (req, res) => {
 });
 // create invoice
 app.get("/invoices/create", (req, res) => {
-  res.render("invoices/create", {title: "Create Invoice"})
-})
+  res.render("invoices/create", { title: "Create Invoice | Spart Business Solutions" });
+});
+// submit new invoice form
+app.post("/new/invoice", async (req, res) => {
+  const invoice = new Invoice(req.body)
+  await invoice.save()
+  res.send(invoice)
+});
 // all invoices
 app.get("/invoices", (req, res) => {
   res.render("invoices/all", {});

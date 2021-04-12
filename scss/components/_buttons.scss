@@ -14,8 +14,12 @@
 %button-small {
   width: 89px;
 }
-
-.addItemButton {
+.button-primary {
+  @extend %button-large;
+  background-color: $purpleDarkBright;
+  color: #fff;
+}
+.button-secondary {
   @extend %button-large;
   background-color: $lightGrey;
   color: $purpleGrey;

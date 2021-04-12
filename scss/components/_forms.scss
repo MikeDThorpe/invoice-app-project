@@ -1,1 +1,17 @@
-
+#new-invoice-form {
+    margin-top: 40px;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0px 0px 50px rgba(37, 41, 69, 0.2);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    h3 {
+        color: $purpleDarkBright;
+    }
+    label, p {
+        color: $purpleDarkGrey
+    }
+}

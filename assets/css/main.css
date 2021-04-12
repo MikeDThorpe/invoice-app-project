@@ -8,18 +8,30 @@ h1 {
 }
 
 h2 {
-  font-family: 20px;
+  font-family: 25px;
   font-weight: bold;
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 p, a, li {
   font-size: 14px;
-  font-weight: 400;
+  cursor: pointer;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: #F8F8F8;
 }
 
 header {
@@ -89,6 +101,27 @@ header img {
   }
 }
 
+#new-invoice-form {
+  margin-top: 40px;
+  background-color: #fff;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 50px rgba(37, 41, 69, 0.2);
+          box-shadow: 0px 0px 50px rgba(37, 41, 69, 0.2);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+#new-invoice-form h3 {
+  color: #7C5DFA;
+}
+
+#new-invoice-form label, #new-invoice-form p {
+  color: #7E88C3;
+}
+
 .button {
   height: 48px;
   font-size: 13px;
@@ -100,16 +133,21 @@ header img {
   -o-border-radius: 50px;
 }
 
-.addItemButton {
+.button-primary, .button-secondary {
   width: 150px;
 }
 
-.addItemButton {
+.button-primary {
+  background-color: #7C5DFA;
+  color: #fff;
+}
+
+.button-secondary {
   background-color: #F8F8F8;
   color: #888EB0;
 }
 
-.addItemButton:hover {
+.button-secondary:hover {
   background-color: #888EB0;
   color: #fff;
 }
