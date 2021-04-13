@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const User = require("./models/user");
 const Invoice = require("./models/invoice");
 
+const InvoiceSchema = require('./schemas/invoice')
+
 const path = require("path");
 const ejsmate = require("ejs-mate");
 
@@ -31,13 +33,16 @@ db.once("open", () => {
 //serve static assets
 app.use(express.static("assets"));
 
+
 // global middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // homepage
 app.get("/", (req, res) => {
-  res.render("index", { title: "Spartan Business Solutions | Create, Receive & Send Invoices" });
+  res.render("index", {
+    title: "Spartan Business Solutions | Create, Receive & Send Invoices",
+  });
 });
 // login page
 app.get("/login", (req, res) => {
@@ -45,10 +50,16 @@ app.get("/login", (req, res) => {
 });
 // create invoice
 app.get("/invoices/create", (req, res) => {
-  res.render("invoices/create", { title: "Create Invoice | Spart Business Solutions" });
+  res.render("invoices/create", {
+    title: "Create Invoice | Spartan Business Solutions",
+  });
 });
 // submit new invoice form
 app.post("/new/invoice", async (req, res) => {
+  const validateInvoice = await InvoiceSchema.validate(req.body);
+  if (validateInvoice.error) {
+    throw new Error(validateInvoice.error)
+  }
   const invoice = new Invoice(req.body)
   await invoice.save()
   res.send(invoice)

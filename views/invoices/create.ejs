@@ -1,7 +1,14 @@
 <% layout('layouts/boilerplate') %>
-<section class="mb-5">
-  <h1>New Invoice</h1>
-  <form class="p-4 validate-form" id="new-invoice-form" action="/new/invoice" method="POST" novalidate>
+<section>
+  <a class="font-bold" href="/">Go back</a>
+  <h1 class="mt-4">New Invoice</h1>
+  <form
+    class="validate-form"
+    id="new-invoice-form"
+    action="/new/invoice"
+    method="POST"
+    novalidate
+  >
     <!-- address form -->
     <h3>Bill From</h3>
     <div class="form-row mt-3">
@@ -79,7 +86,7 @@
       />
     </div>
     <div class="form-group row mt-3">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="clientCity">City</label>
         <input
           type="text"
@@ -89,13 +96,23 @@
           required
         />
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="clientPostcode">Post Code</label>
         <input
           type="text"
           class="form-control"
           id="clientPostcode"
-          name="clientPostcode"
+          name="clientPostCode"
+          required
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="clientCountry">Country</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientCountry"
+          name="clientCountry"
           required
         />
       </div>
@@ -140,22 +157,54 @@
       </div>
     </div>
     <!-- item list -->
-      <h3 class="mt-5">Item List</h3>
-      <div class="row my-3 border-bottom">
-        <div class="col-4"><p>Item</p></div>
-        <div class="col-4"><p>Qty</p></div>
-        <div class="col-4"><p>Price</p></div>
-      </div>
+    <h3 class="mt-5">Item List</h3>
+    <div class="row my-3 border-bottom">
+      <div class="col-4"><p>Item</p></div>
+      <div class="col-4"><p>Qty</p></div>
+      <div class="col-4"><p>Price</p></div>
+    </div>
     <section id="new-invoice-item-list">
       <div class="form-group row pb-3 border-bottom">
-        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="New item" name="items[0][name]" required></div>
-        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="Qty" name="items[0][qty]" required></div>
-        <div class="col-xs-4 col-sm-4 my-2"><input type="text" class="form-control" placeholder="Price" name="items[0][price]" required></div>
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="New item"
+            name="items[0][name]"
+            required
+          />
+        </div>
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Qty"
+            name="items[0][qty]"
+            required
+          />
+        </div>
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Price"
+            name="items[0][price]"
+            required
+          />
+        </div>
       </div>
     </section>
-      <button class="my-4 button button-secondary" type="button" onClick="createNewInvoiceItem()">+ Add New Item</button>
+    <button
+      class="my-4 button button-secondary"
+      type="button"
+      onClick="createNewInvoiceItem()"
+    >
+      + Add New Item
+    </button>
     <div class="d-flex justify-content-end">
-      <button type="button" class="mx-4 button button-secondary">Discard Invoice</button>
+      <button type="button" class="mx-4 button button-secondary">
+        Discard Invoice
+      </button>
       <button type="submit" class="button button-primary">Save Invoice</button>
     </div>
   </form>

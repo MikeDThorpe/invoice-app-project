@@ -1,5 +1,6 @@
 #new-invoice-form {
     margin-top: 40px;
+    padding: 20px;
     background-color: #fff;
     position: relative;
     box-shadow: 0px 0px 50px rgba(37, 41, 69, 0.2);
@@ -13,5 +14,8 @@
     }
     label, p {
         color: $purpleDarkGrey
+    }
+    @include desktop {
+        padding: 40px;
     }
 }
