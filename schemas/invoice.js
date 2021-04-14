@@ -8,6 +8,7 @@ const itemSchema = Joi.array().items(
   })
 );
 const invoiceSchema = Joi.object({
+  paid: Joi.boolean().required(),
   invoiceDate: Joi.string().required(),
   paymentTerms: Joi.string().required(),
   description: Joi.string().required(),

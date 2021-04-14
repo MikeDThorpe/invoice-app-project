@@ -1,0 +1,52 @@
+<% layout('./layouts/boilerplate') %>
+<section class="container">
+  <div class="invoice-header">
+    <article>
+      <h4>Status</h4>
+      <% if(invoice.paid){ %>
+      <div class="paid">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="circle"
+          class="svg-inline--fa fa-circle fa-w-16"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path
+            fill="##33D69F"
+            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+          ></path>
+        </svg>
+        Paid
+      </div>
+      > <% } else{ %>
+      <div class="pending">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="circle"
+          class="svg-inline--fa fa-circle fa-w-16"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path
+            fill="#FF8F00"
+            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
+          ></path>
+        </svg>
+        Pending
+      </div>
+      <% } %>
+    </article>
+    <div class="invoice-buttons">
+        <button class="button button-secondary">Edit</button>
+        <button class="button button-danger">Delete</button>
+        <button class="button button-primary">Mark Paid</button>
+    </div>
+  </div>
+</section>

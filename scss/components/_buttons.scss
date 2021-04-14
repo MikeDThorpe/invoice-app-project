@@ -28,3 +28,12 @@
     color: #fff;
   }
 }
+.button-danger {
+  @extend %button-large;
+  background-color: $lightRed;
+  color: #fff;
+  &:hover {
+    background-color: rgba(236, 87, 87, 0.5);
+    color: #fff;
+  }
+}

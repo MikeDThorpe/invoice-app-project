@@ -1,0 +1,78 @@
+.invoice-header {
+  padding: 20px 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  article {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @include desktop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+}
+.paid,
+.pending {
+  width: 120px;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  svg {
+    height: 8px;
+  }
+  @include desktop {
+      margin-left: 15px;
+  }
+}
+.pending {
+  background-color: rgba(255, 143, 0, 0.2);
+  color: rgb(255, 143, 0);
+}
+.paid {
+    background-color: rgba(51, 214, 159, 0.2);
+    color: rgb(51, 214, 159);
+}
+.invoice-buttons{
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    button {
+        margin: 0px 5px
+    }
+    @include tablet {
+        margin-top: 40px;
+        padding: 0px;
+        position: relative;
+        justify-content: space-between;
+        button {
+            margin: 0;
+        }
+    }
+    @include desktop {
+        margin: 0px;
+        justify-content: flex-end;
+        button {
+            margin-left: 20px;
+        }
+    }
+}

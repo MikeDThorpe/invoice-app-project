@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const InvoiceSchema = new Schema({
   // user: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  paid: Boolean,
   invoiceDate: Date,
   paymentTerms: String,
   description: String,
