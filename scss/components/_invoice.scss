@@ -12,10 +12,13 @@
     justify-content: space-between;
     align-items: center;
   }
+  @include tablet {
+    padding: 40px;
+  }
   @include desktop {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .paid,
@@ -36,7 +39,7 @@
     height: 8px;
   }
   @include desktop {
-      margin-left: 15px;
+    margin-left: 15px;
   }
 }
 .pending {
@@ -44,35 +47,65 @@
   color: rgb(255, 143, 0);
 }
 .paid {
-    background-color: rgba(51, 214, 159, 0.2);
-    color: rgb(51, 214, 159);
+  background-color: rgba(51, 214, 159, 0.2);
+  color: rgb(51, 214, 159);
 }
-.invoice-buttons{
-    width: 100%;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
+.invoice-buttons {
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  button {
+    margin: 0px 5px;
+  }
+  @include tablet {
+    margin-top: 40px;
+    padding: 0px;
+    position: relative;
+    justify-content: space-between;
     button {
-        margin: 0px 5px
+      margin: 0;
     }
-    @include tablet {
-        margin-top: 40px;
-        padding: 0px;
-        position: relative;
-        justify-content: space-between;
-        button {
-            margin: 0;
-        }
+  }
+  @include desktop {
+    margin: 0px;
+    justify-content: flex-end;
+    button {
+      margin-left: 20px;
     }
-    @include desktop {
-        margin: 0px;
-        justify-content: flex-end;
-        button {
-            margin-left: 20px;
-        }
-    }
+  }
+}
+.invoice-body {
+  padding: 20px 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  @include tablet {
+    padding: 40px;
+  }
+}
+#invoice-from-address {
+  @include tablet {
+    text-align: right;
+  }
+}
+.invoice-items-table {
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: $lightGrey;
+}
+.invoice-footer {
+  background-color: $darkBlue;
+  color: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }

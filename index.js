@@ -60,6 +60,11 @@ app.post(
   asyncCatch(async (req, res) => {
     const invoice = req.body;
     invoice.paid = false;
+    const price = [];
+    for (let item of req.body.items) {
+      price.push(parseInt(item.price))
+    }
+    invoice.invoiceTotal = price.reduce((a,b) => a + b)
     const validateInvoice = await InvoiceSchema.validate(invoice);
     if (validateInvoice.error) {
       throw new Error(validateInvoice.error);

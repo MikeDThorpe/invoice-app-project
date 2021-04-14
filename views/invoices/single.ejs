@@ -1,8 +1,9 @@
 <% layout('./layouts/boilerplate') %>
-<section class="container">
-  <div class="invoice-header">
+<section class="container mb-5">
+  <section class="invoice-header">
+    <!-- invoice status -->
     <article>
-      <h4>Status</h4>
+      <h3>Status</h3>
       <% if(invoice.paid){ %>
       <div class="paid">
         <svg
@@ -44,9 +45,71 @@
       <% } %>
     </article>
     <div class="invoice-buttons">
-        <button class="button button-secondary">Edit</button>
-        <button class="button button-danger">Delete</button>
-        <button class="button button-primary">Mark Paid</button>
+      <button class="button button-secondary">Edit</button>
+      <button class="button button-danger">Delete</button>
+      <button class="button button-primary">Mark Paid</button>
     </div>
-  </div>
+  </section>
+  <section class="mt-5 invoice-body">
+    <div class="mb-4 row border-bottom">
+      <!-- invoice id and invoice description -->
+      <div class="mb-3 col-md-6">
+        <h3>#57E7H5</h3>
+        <h4><%= invoice.description %></h4>
+      </div>
+      <!-- invoice from address -->
+      <div id="invoice-from-address" class="col-md-6 mb-3">
+        <p><%= invoice.fromStreet %></p>
+        <p><%= invoice.fromCity %></p>
+        <p><%= invoice.fromPostCode %></p>
+        <p><%= invoice.fromCountry %></p>
+      </div> 
+    </div>
+    <div class="row">
+      <!-- invoice date and payment date -->
+      <div class="col-6 col-md-4">
+        <h5>Invoice Date</h5>
+        <p><%= String(invoice.invoiceDate).slice(0, 15) %></p>
+      </div>
+      <!-- invoice to address -->
+      <div class="col-6 col-md-4">
+        <h5>Invoice To</h5>
+        <p><%= invoice.clientName %></p>
+        <p><%= invoice.clientAddress %></p>
+        <p><%= invoice.clientCity %></p>
+        <p><%= invoice.clientPostCode %></p>
+        <p><%= invoice.clientCountry %></p>
+      </div>
+      <!-- recipient email -->
+      <div class="col-12 col-md-4">
+        <h5>Sent to</h5>
+        <p><%= invoice.clientEmail %></p>
+      </div>
+    </div>
+    <!-- invoice item section -->
+    <section class="mt-4">
+      <table class="mb-0 table table-responsive invoice-items-table responsive">
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Qty</td>
+            <td>Price</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let item of invoice.items) { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.qty %></td>
+              <td>£<%= item.price %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <div class="p-2 invoice-footer d-flex justify-content-between align-items-center">
+        <h4>Invoice Total</h4>
+        <h2>£<%= invoice.invoiceTotal %></h2>
+      </div>
+    </section>
+  </section>
 </section>

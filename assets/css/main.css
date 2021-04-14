@@ -34,6 +34,7 @@ p, a, li {
   border: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 body {
@@ -159,6 +160,12 @@ header img {
           align-items: center;
 }
 
+@media (min-width: 768px) {
+  .invoice-header {
+    padding: 40px;
+  }
+}
+
 @media (min-width: 1200px) {
   .invoice-header {
     display: -webkit-box;
@@ -260,6 +267,44 @@ header img {
   .invoice-buttons button {
     margin-left: 20px;
   }
+}
+
+.invoice-body {
+  padding: 20px 20px;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+          box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .invoice-body {
+    padding: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  #invoice-from-address {
+    text-align: right;
+  }
+}
+
+.invoice-items-table {
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #F8F8F8;
+}
+
+.invoice-footer {
+  background-color: #1E2139;
+  color: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .button {
