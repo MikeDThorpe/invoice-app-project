@@ -54,8 +54,8 @@
     <div class="mb-4 row border-bottom">
       <!-- invoice id and invoice description -->
       <div class="mb-3 col-md-6">
-        <h3>#57E7H5</h3>
-        <h4><%= invoice.description %></h4>
+        <h3 class="mb-2">#57E7H5</h3>
+        <h4 class="font-bold"><%= invoice.description %></h4>
       </div>
       <!-- invoice from address -->
       <div id="invoice-from-address" class="col-md-6 mb-3">
@@ -88,25 +88,25 @@
     </div>
     <!-- invoice item section -->
     <section class="mt-4">
-      <table class="mb-0 table table-responsive invoice-items-table responsive">
-        <thead>
+      <table class="mb-0 invoice-items-table">
+        <thead class="border-bottom">
           <tr>
-            <td>Name</td>
-            <td>Qty</td>
-            <td>Price</td>
+            <td class="p-3">Name</td>
+            <td class="p-3">Qty</td>
+            <td class="p-3">Price</td>
           </tr>
         </thead>
         <tbody>
           <% for (let item of invoice.items) { %>
             <tr>
-              <td><%= item.name %></td>
-              <td><%= item.qty %></td>
-              <td>£<%= item.price %></td>
+              <td class="p-3"><%= item.name %></td>
+              <td class="p-3"><%= item.qty %></td>
+              <td class="p-3">£<%= item.price %></td>
             </tr>
           <% } %>
         </tbody>
       </table>
-      <div class="p-2 invoice-footer d-flex justify-content-between align-items-center">
+      <div class="p-3 invoice-footer d-flex justify-content-between align-items-center">
         <h4>Invoice Total</h4>
         <h2>£<%= invoice.invoiceTotal %></h2>
       </div>

@@ -18,19 +18,23 @@ function createNewInvoiceItem() {
   
   for (let i = 0; i < 3; i++) {
     let input = document.createElement("input");
-    input.type = "text";
     input.classList.add("form-control");
     input.setAttribute("required", true);
     if (i === 0) {
       input.placeholder = "New Item";
+      input.type = "text";
       input.name = `items[${items}][name]`;
     }
     if (i === 1) {
       input.placeholder = "Qty";
+      input.type = "text"
+      input.value = "1"
       input.name = `items[${items}][qty]`;
     }
     if (i === 2) {
       input.placeholder = "Price";
+      input.type = "text";
+      input.value = "0.00";
       input.name = `items[${items}][price]`;
     }
     let inputContainer = document.createElement("div");

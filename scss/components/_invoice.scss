@@ -99,13 +99,11 @@
 }
 .invoice-items-table {
   width: 100%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
   background-color: $lightGrey;
 }
 .invoice-footer {
   background-color: $darkBlue;
   color: #fff;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

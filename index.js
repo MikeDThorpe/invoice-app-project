@@ -39,9 +39,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // homepage
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const invoices = await Invoices.find()
+
   res.render("index", {
     title: "Spartan Business Solutions | Create, Receive & Send Invoices",
+    ...invoices
   });
 });
 // login page
@@ -62,16 +65,24 @@ app.post(
     invoice.paid = false;
     const price = [];
     for (let item of req.body.items) {
-      price.push(parseInt(item.price))
+      const itemPrice = item.price * item.qty;
+      price.push(itemPrice);
     }
-    invoice.invoiceTotal = price.reduce((a,b) => a + b)
+    invoice.invoiceTotal = price.reduce((a, b) => a + b);
+
     const validateInvoice = await InvoiceSchema.validate(invoice);
     if (validateInvoice.error) {
       throw new Error(validateInvoice.error);
     }
-    const newInvoice = new Invoice(invoice);
-    await newInvoice.save();
-    res.redirect(`/invoices/${newInvoice._id}`);
+    try {
+      const newInvoice = new Invoice(invoice);
+      await newInvoice.save();
+      res.redirect(`/invoices/${newInvoice._id}`);
+    }
+    catch (e) {
+      console.log(e)
+      res.redirect(`/invoices/create`);
+    }
   })
 );
 // all invoices
