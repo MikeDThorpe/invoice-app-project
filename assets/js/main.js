@@ -1,21 +1,21 @@
-let items = 1;
-  function deleteInvoiceItemRow(rowId) {
-    let row = document.getElementById(rowId);
-    row.remove();
-  }
+function deleteInvoiceItemRow(rowId) {
+  let row = document.getElementById(rowId);
+  row.remove();
+}
+let invoiceItems = 1;
 
 function createNewInvoiceItem() {
-  items++;
+  invoiceItems++;
 
   const newItemRowContainer = document.createElement("div");
-  newItemRowContainer.setAttribute("id", `row-${items}`);
+  newItemRowContainer.setAttribute("id", `row-${invoiceItems}`);
   newItemRowContainer.classList.add("border-bottom");
   newItemRowContainer.classList.add("py-3");
 
   const newItemRow = document.createElement("div");
   newItemRow.classList.add("form-group");
   newItemRow.classList.add("row");
-  
+
   for (let i = 0; i < 3; i++) {
     let input = document.createElement("input");
     input.classList.add("form-control");
@@ -23,19 +23,19 @@ function createNewInvoiceItem() {
     if (i === 0) {
       input.placeholder = "New Item";
       input.type = "text";
-      input.name = `items[${items}][name]`;
+      input.name = `items[${invoiceItems}][name]`;
     }
     if (i === 1) {
       input.placeholder = "Qty";
-      input.type = "text"
-      input.value = "1"
-      input.name = `items[${items}][qty]`;
+      input.type = "text";
+      input.value = "1";
+      input.name = `items[${invoiceItems}][qty]`;
     }
     if (i === 2) {
       input.placeholder = "Price";
       input.type = "text";
       input.value = "0.00";
-      input.name = `items[${items}][price]`;
+      input.name = `items[${invoiceItems}][price]`;
     }
     let inputContainer = document.createElement("div");
     let inputContainerClasses = ["col-xs-12", "col-sm-4", "my-2"];
@@ -50,7 +50,10 @@ function createNewInvoiceItem() {
   deleteWord.innerHTML = "Delete item";
   deleteWord.classList.add("font-weight-bold");
   deleteWord.classList.add("ms-2");
-  deleteWord.setAttribute("onClick", `deleteInvoiceItemRow("row-${items}")`);
+  deleteWord.setAttribute(
+    "onClick",
+    `deleteInvoiceItemRow("row-${invoiceItems}")`
+  );
   newItemRowContainer.appendChild(deleteWord);
 
   let refNode = undefined;

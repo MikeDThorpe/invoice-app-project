@@ -1,18 +1,24 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
+let methodOverride = require("method-override");
 const asyncCatch = require("./utilities/asyncCatch");
 const ExpressError = require("./utilities/expressError");
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const Invoice = require("./models/invoice");
-
 const InvoiceSchema = require("./schemas/invoice");
-
 const path = require("path");
 const ejsmate = require("ejs-mate");
 
 app.listen(port);
+
+// global middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.use(express.json());
+//serve static assets
+app.use(express.static("assets"));
 
 //set tools for application
 app.set("view engine", "ejs");
@@ -31,21 +37,39 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-//serve static assets
-app.use(express.static("assets"));
-
-// global middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // homepage
-app.get("/", async (req, res) => {
-  const invoices = await Invoices.find()
-
+app.get("/", (req, res) => {
   res.render("index", {
     title: "Spartan Business Solutions | Create, Receive & Send Invoices",
-    ...invoices
   });
+});
+//process edited invoice
+app.put("/invoices/:id/edit", async (req, res, next) => {
+  const newData = req.body;
+  const oldData = await Invoice.findById(req.params.id)
+  newData.paid = oldData.paid
+  newData.invoiceTotal = oldData.invoiceTotal;
+  const filter = { _id: req.params.id }
+  const price = [];
+      for (let item of req.body.items) {
+        const itemPrice = item.price * item.qty;
+        price.push(itemPrice);
+      }
+  newData.invoiceTotal = price.reduce((a, b) => a + b);
+  const validateNewData = await InvoiceSchema.validate(newData);
+  if (validateNewData.error) {
+    throw new Error(validateNewData.error);
+  }
+  try {
+    let newInvoice = await Invoice.findOneAndUpdate(filter, newData);
+    await newInvoice.save()
+    res.redirect(`/invoices/${req.params.id}`)
+
+  } catch (e) {
+    console.log(e);
+        next(new ExpressError("500", "Unable to edit invoice at this time"));
+
+  }
 });
 // login page
 app.get("/login", (req, res) => {
@@ -78,16 +102,19 @@ app.post(
       const newInvoice = new Invoice(invoice);
       await newInvoice.save();
       res.redirect(`/invoices/${newInvoice._id}`);
-    }
-    catch (e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
       res.redirect(`/invoices/create`);
     }
   })
 );
 // all invoices
-app.get("/invoices", (req, res) => {
-  res.render("invoices/all", {});
+app.get("/invoices", async (req, res) => {
+  const invoices = await Invoice.find();
+  res.render("invoices/all", {
+    title: "Invoices | Spartan Business Solutions",
+    invoices,
+  });
 });
 // single invoice
 app.get("/invoices/:id", async (req, res) => {
@@ -95,12 +122,40 @@ app.get("/invoices/:id", async (req, res) => {
   res.render("invoices/single", { title: "Invoice", invoice });
 });
 // edit invoice
-app.get("/invoices/:id/edit", (req, res) => {
-  res.render("invoices/edit", {});
+app.get("/invoices/:id/edit", async (req, res) => {
+  try {
+    const invoice = await Invoice.findById(req.params.id);
+    res.render("invoices/edit", {
+      title: "Edit Invoice | Spartan Business Solutions",
+      invoice,
+    });
+  } catch {
+    next(new ExpressError("404", `No Invoice found with id ${req.params.id}`));
+  }
+});
+// delete invoice
+app.delete("/invoices/:id", async (req, res, next) => {
+  try {
+    const invoice = await Invoice.findById(req.params.id);
+    await Invoice.deleteOne(invoice);
+    res.redirect(`/invoices`);
+  } catch {
+    next(new ExpressError("500", "Unable to delete invoice at this time"));
+  }
 });
 // account details
 app.get("/account", (req, res) => {
   res.render("account", {});
+});
+app.put("/invoices/:id", async (req, res, next) => {
+  try {
+    const invoice = await Invoice.findById(req.params.id);
+    invoice.paid = !invoice.paid;
+    await invoice.save();
+    res.redirect(`/invoices/${req.params.id}`);
+  } catch {
+    next(new ExpressError("500", "Unable to delete invoice at this time"));
+  }
 });
 // 404 route
 app.all("*", (req, res, next) => {

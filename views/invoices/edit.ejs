@@ -1,0 +1,230 @@
+<% layout('layouts/boilerplate') %>
+<section>
+  <a class="font-bold page-nav-link" href="/"> Go back</a>
+  <h1 class="mt-4">Edit Invoice</h1>
+  <form
+    action="/invoices/<%=invoice._id%>/edit?_method=put"
+    class="validate-form"
+    id="new-invoice-form"
+    method="POST"
+    novalidate
+  >
+    <!-- address form -->
+    <h3>Bill From</h3>
+    <div class="form-row mt-3">
+      <label for="addressFrom">Street Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="addressFrom"
+        name="fromStreet"
+        value="<%= invoice.fromStreet%>"
+        required
+      />
+    </div>
+    <div class="form-group row mt-3">
+      <div class="col-md-6">
+        <label for="cityFrom">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cityFrom"
+          name="fromCity"
+          value="<%= invoice.fromCity%>"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="fromPostcode">Post Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postCodeFrom"
+          name="fromPostCode"
+          value="<%= invoice.fromPostCode%>"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-row mt-3">
+      <label for="countryFrom">Country</label>
+      <input
+        type="text"
+        class="form-control"
+        id="countryFrom"
+        name="fromCountry"
+        value="<%= invoice.fromCountry%>"
+        required
+      />
+    </div>
+    <!-- address to -->
+    <h3 class="mt-5">Bill To</h3>
+    <div class="form-row mt-3">
+      <label for="clientName">Client's Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="clientName"
+        name="clientName"
+        value="<%= invoice.clientName%>"
+        required
+      />
+    </div>
+    <div class="form-row mt-3">
+      <label for="clientEmail">Client's Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="clientEmail"
+        name="clientEmail"
+        value="<%= invoice.clientEmail%>"
+        required
+      />
+    </div>
+    <div class="form-row mt-3">
+      <label for="clientStreet">Steeet Address</label>
+      <input
+        type="text"
+        id="clientStreet"
+        class="form-control"
+        name="clientStreet"
+        value="<%= invoice.clientStreet%>"
+        required
+      />
+    </div>
+    <div class="form-group row mt-3">
+      <div class="col-md-4">
+        <label for="clientCity">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientCity"
+          name="clientCity"
+          value="<%= invoice.clientCity%>"
+          required
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="clientPostcode">Post Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientPostcode"
+          name="clientPostCode"
+          value="<%= invoice.clientPostCode%>"
+          required
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="clientCountry">Country</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientCountry"
+          name="clientCountry"
+          value="<%= invoice.clientCountry%>"
+          required
+        />
+      </div>
+    </div>
+    <!-- invoice details -->
+    <h3 class="mt-5">Invoice Details</h3>
+    <div class="form-group row">
+      <div class="col-lg-4 mt-3">
+        <label for="invoiceDate">Invoice Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="invoiceDate"
+          name="invoiceDate"
+          value="<%= invoice.invoiceDate%>"
+          required
+        />
+      </div>
+      <div class="col-lg-4 mt-3">
+        <label for="invoiceTerms">Invoice Terms</label>
+        <select
+          id="invoiceTerms"
+          class="form-select"
+          name="paymentTerms"
+          selected="<%= invoice.paymentTerms%>"
+          required
+        >
+          <option value="1">Net 1 Day</option>
+          <option value="7">Net 7 Days</option>
+          <option value="14">Net 14 Days</option>
+          <option value="30">Net 30 Days</option>
+          <option value="60">Net 60 Days</option>
+        </select>
+      </div>
+      <div class="col-lg-4 mt-3">
+        <label for="description">Invoice Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="description"
+          value="<%= invoice.description%>"
+          required
+        />
+      </div>
+    </div>
+    <!-- item list -->
+    <h3 class="mt-5">Item List</h3>
+    <div class="row mt-3 border-bottom">
+      <div class="col-4"><p>Item</p></div>
+      <div class="col-4"><p>Qty</p></div>
+      <div class="col-4"><p>Price (£)</p></div>
+    </div>
+    <section id="new-invoice-item-list">
+      <% invoice.items.forEach((item, i) => { %>
+      <div id="row-<%=i%>"class="form-group row py-3 border-bottom">
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="New item"
+            name="items[<%=i%>][name]"
+            value="<%= item.name%>"
+            required
+          />
+        </div>
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Qty"
+            name="items[<%=i%>][qty]"
+            value="<%= item.qty%>"
+            required
+          />
+        </div>
+        <div class="col-xs-4 col-sm-4 my-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Price"
+            name="items[<%=i%>][price]"
+            value="<%= item.price%>"
+            required
+          />
+        </div>
+        <p onClick="deleteInvoiceItemRow(`row-<%=i%>`)">Delete item</p>
+      </div>
+      <% }) %>
+    </section>
+    <button
+      class="my-4 button button-secondary"
+      type="button"
+      onClick="createNewInvoiceItem()"
+    >
+      + Add New Item
+    </button>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="mx-4 button button-secondary">
+        Discard Invoice
+      </button>
+      <button type="submit" class="button button-primary">Save Invoice</button>
+    </div>
+  </form>
+</section>

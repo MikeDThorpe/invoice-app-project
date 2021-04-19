@@ -17,7 +17,18 @@ h4 {
 p, a, li {
   font-size: 14px;
   cursor: pointer;
+  text-decoration: none;
 }
 .font-bold {
   font-weight: 700;
+}
+.page-nav-link {
+  color: $purpleGrey;
+  &::before {
+    content: url('/icons/icon-arrow-left.svg');
+    height: 1rem;
+  }
+  &:hover {
+    color: $purpleDarkBright
+  }
 }

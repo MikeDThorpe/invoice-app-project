@@ -22,10 +22,24 @@ h4 {
 p, a, li {
   font-size: 14px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .font-bold {
   font-weight: 700;
+}
+
+.page-nav-link {
+  color: #888EB0;
+}
+
+.page-nav-link::before {
+  content: url("/icons/icon-arrow-left.svg");
+  height: 1rem;
+}
+
+.page-nav-link:hover {
+  color: #7C5DFA;
 }
 
 * {
@@ -189,9 +203,9 @@ header img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -205,6 +219,7 @@ header img {
 .paid svg,
 .pending svg {
   height: 8px;
+  margin-right: 15px;
 }
 
 @media (min-width: 1200px) {
@@ -222,6 +237,10 @@ header img {
 .paid {
   background-color: rgba(51, 214, 159, 0.2);
   color: #33d69f;
+}
+
+.paid svg {
+  fill: #33d69f;
 }
 
 .invoice-buttons {
@@ -303,6 +322,38 @@ header img {
   color: #fff;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.index-invoices {
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+}
+
+.index-invoice-card {
+  width: 100%;
+  color: #888EB0;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+          box-shadow: 0px 0px 15px rgba(37, 41, 69, 0.2);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-transition: -webkit-box-shadow 0.5s ease-in-out;
+  transition: -webkit-box-shadow 0.5s ease-in-out;
+  transition: box-shadow 0.5s ease-in-out;
+  transition: box-shadow 0.5s ease-in-out, -webkit-box-shadow 0.5s ease-in-out;
+  -webkit-transition: box-shadow 0.5s ease-in-out;
+  -moz-transition: box-shadow 0.5s ease-in-out;
+  -ms-transition: box-shadow 0.5s ease-in-out;
+  -o-transition: box-shadow 0.5s ease-in-out;
+}
+
+.index-invoice-card:hover {
+  -webkit-box-shadow: 0px 0px 25px rgba(37, 41, 69, 0.4);
+          box-shadow: 0px 0px 25px rgba(37, 41, 69, 0.4);
 }
 
 .button {

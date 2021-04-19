@@ -1,6 +1,7 @@
 <% layout('./layouts/boilerplate') %>
 <section class="container mb-5">
-  <section class="invoice-header">
+  <a class="font-bold page-nav-link" href="/invoices"> All Invoices</a>
+  <section class="mt-4 invoice-header">
     <!-- invoice status -->
     <article>
       <h3>Status</h3>
@@ -23,7 +24,7 @@
         </svg>
         Paid
       </div>
-      > <% } else{ %>
+      <% } else{ %>
       <div class="pending">
         <svg
           aria-hidden="true"
@@ -45,9 +46,19 @@
       <% } %>
     </article>
     <div class="invoice-buttons">
-      <button class="button button-secondary">Edit</button>
-      <button class="button button-danger">Delete</button>
-      <button class="button button-primary">Mark Paid</button>
+      <a href="/invoices/<%=invoice._id%>/edit">
+        <button class="button button-secondary">Edit</button>
+      </a>
+      <form action="/invoices/<%=invoice._id%>?_method=delete" method="POST">
+        <button class="button button-danger">Delete</button>
+      </form>
+      <form action="/invoices/<%=invoice._id%>?_method=put" method="POST">
+        <% if(invoice.paid){ %>
+        <button class="button button-primary">Mark Pending</button>
+        <% } else { %>
+        <button class="button button-primary">Mark Paid</button>
+        <% } %>
+      </form>
     </div>
   </section>
   <section class="mt-5 invoice-body">
@@ -63,7 +74,7 @@
         <p><%= invoice.fromCity %></p>
         <p><%= invoice.fromPostCode %></p>
         <p><%= invoice.fromCountry %></p>
-      </div> 
+      </div>
     </div>
     <div class="row">
       <!-- invoice date and payment date -->
@@ -98,15 +109,17 @@
         </thead>
         <tbody>
           <% for (let item of invoice.items) { %>
-            <tr>
-              <td class="p-3"><%= item.name %></td>
-              <td class="p-3"><%= item.qty %></td>
-              <td class="p-3">£<%= item.price %></td>
-            </tr>
+          <tr>
+            <td class="p-3"><%= item.name %></td>
+            <td class="p-3"><%= item.qty %></td>
+            <td class="p-3">£<%= item.price %></td>
+          </tr>
           <% } %>
         </tbody>
       </table>
-      <div class="p-3 invoice-footer d-flex justify-content-between align-items-center">
+      <div
+        class="p-3 invoice-footer d-flex justify-content-between align-items-center"
+      >
         <h4>Invoice Total</h4>
         <h2>£<%= invoice.invoiceTotal %></h2>
       </div>
