@@ -22,6 +22,9 @@ p, a, li {
 .font-bold {
   font-weight: 700;
 }
+.color-purple-Grey {
+  color: $purpleGrey;
+}
 .page-nav-link {
   color: $purpleGrey;
   &::before {

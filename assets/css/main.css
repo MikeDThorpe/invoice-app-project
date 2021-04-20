@@ -29,6 +29,10 @@ p, a, li {
   font-weight: 700;
 }
 
+.color-purple-Grey {
+  color: #888EB0;
+}
+
 .page-nav-link {
   color: #888EB0;
 }

@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <section>
-  <a class="font-bold page-nav-link" href="/"> Go back</a>
+  <a class="font-bold page-nav-link" href="/invoices"> All Invoices</a>
   <h1 class="mt-4">Edit Invoice</h1>
   <form
     action="/invoices/<%=invoice._id%>/edit?_method=put"
@@ -178,7 +178,8 @@
     </div>
     <section id="new-invoice-item-list">
       <% invoice.items.forEach((item, i) => { %>
-      <div id="row-<%=i%>"class="form-group row py-3 border-bottom">
+        <% if(i === 0) { %>
+        <div id="row-<%=i%>"class="form-group row py-3 border-bottom">
         <div class="col-xs-4 col-sm-4 my-2">
           <input
             type="text"
@@ -209,8 +210,42 @@
             required
           />
         </div>
-        <p onClick="deleteInvoiceItemRow(`row-<%=i%>`)">Delete item</p>
       </div>
+        <% } else { %>
+          <div id="row-<%=i%>"class="form-group row py-3 border-bottom">
+            <div class="col-xs-4 col-sm-4 my-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="New item"
+                name="items[<%=i%>][name]"
+                value="<%= item.name%>"
+                required
+              />
+            </div>
+            <div class="col-xs-4 col-sm-4 my-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Qty"
+                name="items[<%=i%>][qty]"
+                value="<%= item.qty%>"
+                required
+              />
+            </div>
+            <div class="col-xs-4 col-sm-4 my-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Price"
+                name="items[<%=i%>][price]"
+                value="<%= item.price%>"
+                required
+              />
+            </div>
+            <p onClick="deleteInvoiceItemRow(`row-<%=i%>`)">Delete item</p>
+          </div>
+        <% } %>
       <% }) %>
     </section>
     <button
