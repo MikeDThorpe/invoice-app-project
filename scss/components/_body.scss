@@ -8,3 +8,9 @@
 body {
     background-color: $lightGrey;
 }
+select {
+    background-color: $lightGrey;
+}
+select:hover, select:active, select:focus {
+    outline: none;
+}

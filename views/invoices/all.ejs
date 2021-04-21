@@ -1,9 +1,16 @@
 <% layout('layouts/boilerplate') %>
 <section class="index-invoices">
   <div class="d-flex justify-content-between align-items-center">
-    <h2 class="color-purple-Grey "><strong><%- invoices.length %></strong> <%= invoices.length > 1 ? "Invoices" : "Invoice" %></h2>
+    <h2 class="color-purple-Grey">
+      <strong><%- invoices.length %></strong> <%= invoices.length > 1 ?
+      "Invoices" : "Invoice" %>
+    </h2>
     <div>
-      
+      <select class="mx-4" name="filter" id="filter">
+        <option value="all">All Invoices</option>
+        <option value="pending">Pending</option>
+        <option value="pending">Paid</option>
+      </select>
       <a href="/invoices/create">
         <button class="button button-primary">New Invoice</button>
       </a>

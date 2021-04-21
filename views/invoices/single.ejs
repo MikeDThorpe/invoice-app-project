@@ -52,7 +52,7 @@
       <form action="/invoices/<%=invoice._id%>?_method=delete" method="POST">
         <button class="button button-danger">Delete</button>
       </form>
-      <form action="/invoices/<%=invoice._id%>?_method=put" method="POST">
+      <form action="/invoices/<%=invoice._id%>/edit?_method=put&setPaid=true" method="POST">
         <% if(invoice.paid){ %>
         <button class="button button-primary">Mark Pending</button>
         <% } else { %>

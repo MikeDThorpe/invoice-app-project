@@ -59,6 +59,14 @@ body {
   background-color: #F8F8F8;
 }
 
+select {
+  background-color: #F8F8F8;
+}
+
+select:hover, select:active, select:focus {
+  outline: none;
+}
+
 header {
   position: relative;
   display: -webkit-box;
