@@ -34,10 +34,19 @@ exports.create_invoice_post = async (req, res, next) => {
 exports.read_all_invoices_get = async (req, res, next) => {
   const invoices = await Invoice.find();
   res.render("invoices/all", {
-    title: "Invoices",
+    title: "All Invoices",
     invoices,
   });
 };
+exports.api_read_all_invoices_get = async (req, res, next) => {
+  try {
+    const invoices = await Invoice.find();
+    res.status(200).send(invoices)
+  }
+  catch {
+    res.status(500).send({errorMsg: "Unable to get invoices."})
+  }
+}
 exports.read_single_invoice_get = async (req, res, next) => {
   try {
     const invoice = await Invoice.findById(req.params.id);
@@ -53,7 +62,7 @@ exports.delete_invoice_delete = async (req, res, next) => {
   try {
     const invoice = await Invoice.findById(req.params.id);
     await Invoice.deleteOne(invoice);
-    res.redirect(`/invoices`);
+    res.redirect(`/invoices/all`);
   } catch {
     next(new ExpressError("500", "Unable to delete invoice at this time"));
   }

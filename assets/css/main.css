@@ -63,7 +63,27 @@ select {
   background-color: #F8F8F8;
 }
 
-select:hover, select:active, select:focus {
+select:hover,
+select:active,
+select:focus {
+  outline: none;
+}
+
+input[type="search"] {
+  width: 100%;
+  height: 50px;
+  padding: 0px 30px;
+  font-size: 18px;
+  color: #1E2139;
+  background-color: #DFE3FA;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+input[type="search"]:hover, input[type="search"]:focus {
   outline: none;
 }
 

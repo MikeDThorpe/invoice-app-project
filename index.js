@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3001;
-let methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsmate = require("ejs-mate");
-const routes = require("./routes");
+const invoiceRoutes = require("./router/invoices");
+let methodOverride = require("method-override");
+const cookieParser = require("cookie-parser");
 
+const port = process.env.PORT || 3001;
 app.listen(port);
 
 //create database connection with mongoose
@@ -30,9 +31,11 @@ app.use(methodOverride("_method"));
 app.use(express.static("assets"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 
 // global middleware
-app.use(routes);
+app.use('/invoices', invoiceRoutes);
+
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.send(message);

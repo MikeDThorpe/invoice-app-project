@@ -2,79 +2,29 @@
 <section class="index-invoices">
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="color-purple-Grey">
-      <strong><%- invoices.length %></strong> <%= invoices.length > 1 ?
+      <strong><%- invoices.length %></strong> <%= invoices.length != 1 ?
       "Invoices" : "Invoice" %>
     </h2>
     <div>
-      <select class="mx-4" name="filter" id="filter">
+      <select class="mx-4" name="filter" id="invoice-all-filter">
         <option value="all">All Invoices</option>
         <option value="pending">Pending</option>
-        <option value="pending">Paid</option>
+        <option value="paid">Paid</option>
       </select>
       <a href="/invoices/create">
         <button class="button button-primary">New Invoice</button>
       </a>
     </div>
   </div>
-  <div class="mt-5">
-    <% for(let invoice of invoices){ %>
-    <a href="/invoices/<%= invoice._id%>">
-      <article class="mb-4 p-3 index-invoice-card">
-        <div
-          class="mb-2 d-flex flex-wrap justify-content-between align-items-center"
-        >
-          <div>
-            <p><strong>#57E7H5</strong></p>
-            <p>Due <%= String(invoice.invoiceDate).slice(0, 15) %></p>
-          </div>
-          <p><%= invoice.clientName %></p>
-        </div>
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-center"
-        >
-          <h5>£<%= invoice.invoiceTotal %></h5>
-          <% if(invoice.paid){ %>
-          <div class="paid">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fas"
-              data-icon="circle"
-              class="svg-inline--fa fa-circle fa-w-16"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="##33D69F"
-                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
-              ></path>
-            </svg>
-            Paid
-          </div>
-          <% } else{ %>
-          <div class="pending">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fas"
-              data-icon="circle"
-              class="svg-inline--fa fa-circle fa-w-16"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="#FF8F00"
-                d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
-              ></path>
-            </svg>
-            Pending
-          </div>
-          <% } %>
-        </div>
-      </article>
-    </a>
-    <% } %>
+  <div class="my-5">
+    <div id="invoice-search">
+      <input id="invoice-search-bar" type="search" placeholder="Search invoices by client..." autofocus>
+    </div>
+    <div id="no-invoice-graphic" class=" mt-5 <%= invoices.length === 0 ? "d-flex" : "d-none" %> flex-column align-items-center justify-content-center">
+          <img width="300px" src="/images/illustration-empty.svg" alt="No invoices to show">
+          <h2 class="mt-3 mb-2 text-center font-bold">Nothing to see here</h2>
+          <h4 id="no-invoice-msg" class="text-center">No invoices to show. <a href="/invoices/create">Create a new one.</a></h4>
+    </div>
   </div>
+  <div id="invoice-cards-container"></div>
 </section>
