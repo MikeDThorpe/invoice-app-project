@@ -12,8 +12,6 @@ router.get("/", (req, res, next) => {
 })
 // all invoices
 router.get("/all", invoiceController.read_all_invoices_get);
-// api call to get all invoices
-router.get("/api/all", invoiceController.api_read_all_invoices_get)
 // create new invoice
 router.get("/create", invoiceController.create_invoice_get);
 // single invoice
@@ -27,8 +25,5 @@ router.put("/:id/edit", invoiceController.update_invoice_put)
 // delete invoice
 router.delete("/:id", invoiceController.delete_invoice_delete)
 // 404 route
-router.get("*", (req, res, next) => {
-  next(new ExpressError("404", "Page not found"));
-});
 
 module.exports = router;

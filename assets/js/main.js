@@ -61,66 +61,40 @@ function createNewInvoiceItem() {
 }
 // filter invoices from dropdown
 let invoiceFilter = document.getElementById("invoice-all-filter");
-invoiceFilter.addEventListener("change", (e) => {
+invoiceFilter.addEventListener("change", async (e) => {
   const filter = e.target.value;
-  const invoiceCards = document.getElementsByClassName("index-invoice-card");
-  const noInvoiceDiv = document.getElementById("no-invoice-graphic");
-  let tracker = 0;
-  for (let i = 0; i < invoiceCards.length; i++) {
-    if (filter === "all") {
-      invoiceCards[i].classList.remove("d-none");
-      invoiceCards[i].classList.add("d-block");
-      tracker = invoiceCards.length;
-    }
-    if (filter === "paid") {
-      if (invoiceCards[i].classList.contains("paid-true")) {
-        tracker++;
-        invoiceCards[i].classList.remove("d-none");
-        invoiceCards[i].classList.add("d-block");
-      } else {
-        invoiceCards[i].classList.add("d-none");
-      }
-    }
-    if (filter === "pending") {
-      if (invoiceCards[i].classList.contains("paid-false")) {
-        tracker++;
-        invoiceCards[i].classList.remove("d-none");
-        invoiceCards[i].classList.add("d-block");
-      } else {
-        invoiceCards[i].classList.add("d-none");
-      }
-    }
-  }
-  if (!tracker) {
-    noInvoiceDiv.classList.remove("d-none");
-    noInvoiceDiv.classList.add("d-flex");
-  } else {
-    noInvoiceDiv.classList.remove("d-flex");
-    noInvoiceDiv.classList.add("d-none");
-  }
-  if (filter === "all") {
-    document.getElementById(
-      "no-invoice-msg"
-    ).innerHTML = `<h4>No invoices to show. <a href="/invoices/create">Create a new one.</a></h4>`;
-  } else {
-    document.getElementById(
-      "no-invoice-msg"
-    ).textContent = `No ${filter} invoices to show`;
+  try {
+    const { data: invoices } = await axios({
+      url: `http://localhost:3001/api/all?filter=${filter}`,
+      method: "get",
+    });
+    manageInvoiceDisplay(invoices);
+  } catch (err) {
+    console.error(err);
   }
 });
+
 const loadInvoices = async () => {
   try {
     const { data: invoices } = await axios({
-      url: "http://localhost:3001/invoices/api/all",
+      url: "http://localhost:3001/api/all",
       method: "get",
     });
-    displayInvoices(invoices);
+    manageInvoiceDisplay(invoices);
   } catch (err) {
     console.error(err);
   }
 };
-const displayInvoices = (invoiceArr) => {
+const manageInvoiceDisplay = (invoiceArr) => {
   let invoiceCardContainer = document.getElementById("invoice-cards-container");
+  const noInvoiceGraphic = document.getElementById("no-invoice-graphic");
+  noInvoiceGraphic.classList.add("d-none");
+  if (invoiceArr.length === 0) {
+    noInvoiceGraphic.classList.add("d-flex");
+    noInvoiceGraphic.classList.remove("d-none");
+    invoiceCardContainer.innerHTML = ""
+    return;
+  }
   const paidToken = `
   <div class="paid">
     <svg
@@ -132,8 +106,8 @@ const displayInvoices = (invoiceArr) => {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-    >
-    <path
+      >
+      <path
       fill="##33D69F"
       d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
     ></path>
@@ -157,10 +131,10 @@ const displayInvoices = (invoiceArr) => {
     ></path>
   </svg>
   Pending
-  </div>`
-
-  const invoiceCards = invoiceArr.map((invoice) => {
-    return `
+  </div>`;
+  const invoiceCards = invoiceArr
+    .map((invoice) => {
+      return `
       <a href="/invoices/${invoice._id}">
         <article class="mt-5 p-3 index-invoice-card paid-${invoice.paid}%>">
           <div class="mb-2 d-flex flex-wrap justify-content-between align-items-center">
@@ -177,9 +151,9 @@ const displayInvoices = (invoiceArr) => {
         </article>
         </a>
     `;
-  }).join();
+    })
+    .join();
   invoiceCardContainer.innerHTML = invoiceCards;
 };
-
 
 loadInvoices();

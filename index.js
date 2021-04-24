@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const ejsmate = require("ejs-mate");
 const invoiceRoutes = require("./router/invoices");
+const apiRoutes = require("./router/api");
 let methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 
@@ -34,7 +35,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 // global middleware
-app.use('/invoices', invoiceRoutes);
+app.use("/invoices", invoiceRoutes);
+app.use("/api", apiRoutes);
+
+app.use("*", (req, res, next) => {
+  next(new ExpressError("404", "Page not found"));
+});
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

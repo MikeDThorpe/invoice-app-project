@@ -38,15 +38,6 @@ exports.read_all_invoices_get = async (req, res, next) => {
     invoices,
   });
 };
-exports.api_read_all_invoices_get = async (req, res, next) => {
-  try {
-    const invoices = await Invoice.find();
-    res.status(200).send(invoices)
-  }
-  catch {
-    res.status(500).send({errorMsg: "Unable to get invoices."})
-  }
-}
 exports.read_single_invoice_get = async (req, res, next) => {
   try {
     const invoice = await Invoice.findById(req.params.id);
