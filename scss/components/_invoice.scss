@@ -21,8 +21,7 @@
     align-items: center;
   }
 }
-.paid,
-.pending {
+.paid-status-token {
   width: 120px;
   height: 40px;
   padding-left: 15px;
@@ -46,6 +45,9 @@
 .pending {
   background-color: rgba(255, 143, 0, 0.2);
   color: rgb(255, 143, 0);
+  svg {
+    fill: rgb(255, 143, 0);
+  }
 }
 .paid {
   background-color: rgba(51, 214, 159, 0.2);

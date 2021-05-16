@@ -1,9 +1,9 @@
 <% layout('layouts/boilerplate') %>
 <section>
-  <a class="font-bold page-nav-link" href="/invoices/all"> All Invoices</a>
+  <a class="font-bold page-nav-link" href="/invoices"> View Invoices</a>
   <h1 class="mt-4">Edit Invoice</h1>
   <form
-    action="/invoices/<%=invoice._id%>/edit?_method=put"
+    action="/api/invoices/edit/<%=invoice._id%>?_method=put"
     class="validate-form"
     id="new-invoice-form"
     method="POST"

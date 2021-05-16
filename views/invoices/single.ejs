@@ -1,12 +1,12 @@
 <% layout('./layouts/boilerplate') %>
 <section class="container mb-5">
-  <a class="font-bold page-nav-link" href="/invoices/all"> All Invoices</a>
+  <a class="font-bold page-nav-link" href="/invoices"> All Invoices</a>
   <section class="mt-4 invoice-header">
     <!-- invoice status -->
     <article>
       <h3>Status</h3>
       <% if(invoice.paid){ %>
-      <div class="paid">
+      <div id="paid-status-token" class="paid-status-token paid">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -18,14 +18,14 @@
           viewBox="0 0 512 512"
         >
           <path
-            fill="##33D69F"
+            fill="currentColor"
             d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
           ></path>
         </svg>
-        Paid
+        <p>Paid</p>
       </div>
       <% } else{ %>
-      <div class="pending">
+      <div id="paid-status-token" class="paid-status-token pending">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -37,11 +37,11 @@
           viewBox="0 0 512 512"
         >
           <path
-            fill="#FF8F00"
+            fill="currentColor"
             d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
           ></path>
         </svg>
-        Pending
+        <p>Pending</p>
       </div>
       <% } %>
     </article>
@@ -52,13 +52,11 @@
       <form action="/invoices/<%=invoice._id%>?_method=delete" method="POST">
         <button class="button button-danger">Delete</button>
       </form>
-      <form action="/invoices/<%=invoice._id%>/edit?_method=put&setPaid=true" method="POST">
         <% if(invoice.paid){ %>
-        <button class="button button-primary">Mark Pending</button>
+        <button class="button button-primary mark-paid-status-button">Mark Pending</button>
         <% } else { %>
-        <button class="button button-primary">Mark Paid</button>
+        <button class="button button-primary mark-paid-status-button">Mark Paid</button>
         <% } %>
-      </form>
     </div>
   </section>
   <section class="mt-5 invoice-body">

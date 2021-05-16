@@ -1,0 +1,34 @@
+<% layout('./layouts/boilerplate') %>
+<h1 class="text-center">Register</h1>
+<section class="homescreen d-flex justify-content-center align-items-center">
+  <form method="post" action="/api/user" class="mt-5 p-5 rounded" id="user-signup-form">
+    <div class="row mb-5">
+      <div class="col">
+        <input type="text" name="firstName" id="firstName" placeholder="First Name" required/>
+      </div>
+      <div class="col">
+        <input type="text" name="lastName" id="lastName" placeholder="Last Name" required/>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col">
+        <input type="text" name="email" id="email" placeholder="Email" required/>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col">
+        <input type="text" name="username" id="username" placeholder="Create Username" required/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="password" name="password" id="password" placeholder="Create Password" required/>
+      </div>
+      <div class="col">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required/>
+      </div>
+    </div>
+    <small class="text-danger mt-4" id="user-signup-form-error"></small>
+    <button class="mt-5" type="submit">SIGNUP</button>
+  </form>
+</section>
